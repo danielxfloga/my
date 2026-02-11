@@ -17,14 +17,22 @@
 
     <header class="header">
         <div class="logo">Daniel Flores</div>
-        <nav class="nav">
+
+        <button class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <nav class="nav" id="nav">
             <a href="#home" class="active">Inicio</a>
             <a href="#about">Sobre Mí</a>
             <a href="#works">Portafolio</a>
             <a href="#service">Servicio</a>
             <a href="#testimonials">Testimonios</a>
+            <a href="#chat" class="mobile-only btn-chat-mobile">Hablemos</a>
         </nav>
-        <a href="#chat" class="btn-chat">Hablemos</a>
+        <a href="#chat" class="btn-chat desktop-only">Hablemos</a>
     </header>
 
     <section class="hero" id="home">
@@ -81,6 +89,4 @@
     <script src="./JS/script.js"></script>
 </body>
 
-
 </html>
-

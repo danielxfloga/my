@@ -147,4 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Continually create new icons
         setInterval(createIcon, 900);
     }
+
+    // --- Mobile Menu Toggle ---
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('nav');
+    const mobileNavLinks = document.querySelectorAll('.nav a');
+
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    }
 });
