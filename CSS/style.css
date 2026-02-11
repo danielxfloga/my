@@ -1,0 +1,517 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #ffffff;
+    --text-muted: #888888;
+    --accent-color: #D4FF3F;
+    --font-main: 'Inter', sans-serif;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.nav a:hover,
+.nav a.active {
+    color: var(--text-color);
+}
+
+.btn-chat {
+    background-color: #ffffff;
+    color: #000;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.btn-chat:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* --- Hero Section --- */
+.hero {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px;
+    /* Izquierda, Imagen, Sidebar */
+    align-items: center;
+    padding: 0 4rem;
+    position: relative;
+    height: 100vh;
+    padding-top: 80px;
+    /* Compensar header */
+}
+
+/* Columna Izquierda */
+.hero-content-left {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.specialization {
+    color: var(--text-muted);
+    max-width: 300px;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* Botón Available */
+.availability {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    color: #000;
+    padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+    border-radius: 50px;
+    width: fit-content;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.status-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-left: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flecha dentro del círculo verde */
+.status-icon::after {
+    content: '↗';
+    font-size: 1.2rem;
+}
+
+/* Título Gigante */
+.hero-title {
+    font-size: clamp(3rem, 7vw, 7rem);
+    /* Responsive typography */
+    font-weight: 800;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    /* Posicionamiento para que se superponga ligeramente si es necesario */
+    position: relative;
+    margin-bottom: -40px;
+    /* Efecto visual de cercanía al borde inferior */
+}
+
+/* Contenedor Imagen Central */
+.hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+}
+
+/* El resplandor (Glow) detrás de la persona */
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+    z-index: -1;
+    filter: blur(40px);
+}
+
+.hero-image {
+    max-height: 85vh;
+    object-fit: contain;
+    filter: grayscale(20%);
+    /* Un toque desaturado para elegancia */
+    transition: var(--transition);
+}
+
+.hero-image:hover {
+    filter: grayscale(0%);
+}
+
+/* --- Social Icons Updates con Font Awesome --- */
+
+.social-icons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* Transición suave para el contenedor */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    max-height: 500px;
+    /* Altura suficiente */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estado oculto (Closed) */
+.social-icons-container.closed .social-links {
+    opacity: 0;
+    pointer-events: none;
+    /* Evita clicks cuando están ocultos */
+    transform: translateY(20px) scale(0.8);
+    max-height: 0;
+    margin: 0;
+    /* Quita el espacio */
+}
+
+/* Estilo base de los botones */
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    /* Tamaño del icono FontAwesome */
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Hover general */
+.social-icon:hover {
+    transform: scale(1.1);
+    background-color: #333;
+}
+
+/* El botón Toggle (Verde) */
+.toggle-btn {
+    background-color: var(--accent-color);
+    /* Verde neón */
+    color: #000;
+    z-index: 10;
+}
+
+.toggle-btn:hover {
+    background-color: #bce028;
+    transform: rotate(90deg);
+    /* Pequeño giro al hacer hover */
+}
+
+/* Cuando está cerrado, el botón verde cambia de estilo si quieres */
+.social-icons-container.closed .toggle-btn {
+    background-color: #ffffff;
+    /* Opcional: cambia a blanco cuando está cerrado */
+}
+
+
+/* --- Animaciones --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content-left>*,
+.hero-image,
+.social-sidebar {
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+    /* Inicio invisible */
+}
+
+/* Retrasos escalonados */
+.hero-content-left>*:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.hero-content-left>*:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.hero-content-left>*:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.hero-image {
+    animation-delay: 0.4s;
+}
+
+.social-sidebar {
+    animation-delay: 0.8s;
+}
+
+/* --- Scroll Down Indicator --- */
+.scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.scroll-down:hover {
+    color: var(--accent-color);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background-color: var(--text-muted);
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-color);
+    animation: scrollUnfold 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes scrollUnfold {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* --- About Section --- */
+.about-section {
+    padding: 6rem 4rem;
+    background-color: #0a0a0a;
+    /* Slightly lighter than main bg */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    /* Give it some substantial presence */
+    position: relative;
+    border-top: 1px solid #1a1a1a;
+
+    /* 3D Context */
+    perspective: 1200px;
+    overflow: hidden;
+    /* Ensure 3D doesn't overflow weirdly */
+}
+
+/* --- Icon Rain Background --- */
+.icon-rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-icon {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.1);
+    /* Default low opacity white */
+    font-size: 1.5rem;
+    filter: blur(2px);
+    animation: floatDown linear infinite;
+    user-select: none;
+}
+
+.floating-icon.accent {
+    color: rgba(212, 255, 63, 0.15);
+    /* Neon green hint */
+    filter: blur(3px);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+        /* Fade in */
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(180%) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.about-container {
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    /* Ensure text is above icons */
+
+    /* Animation Initial State */
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg) translateY(-50px);
+    transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Class triggered by JS */
+.about-section.unfold .about-container {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+}
+
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    letter-spacing: -1px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+
+/* Responsive básico */
+@media (max-width: 968px) {
+    .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        text-align: center;
+        padding: 6rem 2rem 2rem;
+    }
+
+    .hero-content-left {
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .social-sidebar {
+        flex-direction: row;
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .social-label {
+        writing-mode: horizontal-tb;
+        margin-bottom: 0;
+        margin-right: 1rem;
+    }
+
+    .social-label::after {
+        display: none;
+        /* Ocultar línea en móvil */
+    }
+
+    .social-icons {
+        flex-direction: row;
+    }
+}
