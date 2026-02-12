@@ -110,7 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
             iconElement.className = `floating-icon ${randomIcon}`;
 
             // Randomize styling
-            const size = Math.random() * 2 + 1; // 1rem to 3rem
+            let size = Math.random() * 2 + 1; // 1rem to 3rem
+
+            // Si es dispositivo móvil, reducir tamaño a la mitad
+            if (window.innerWidth < 768) {
+                size = size * 0.5;
+            }
+
             iconElement.style.fontSize = `${size}rem`;
 
             const left = Math.random() * 100; // 0% to 100%
@@ -167,4 +173,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+
+    // --- Scroll Spy (Active Menu Highlight) ---
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            // Offset for header height (approx 80px)
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href').includes(current)) {
+                a.classList.add('active');
+            }
+        });
+    });
 });

@@ -590,30 +590,51 @@ body {
     }
 
     .social-sidebar {
-        order: 3;
-        flex-direction: row;
-        width: 100%;
-        margin-top: 1rem;
+        /* Position vertically on the left */
+        order: unset;
+        /* Order doesn't matter for absolute position */
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding-left: 1rem;
+        /* Small spacing from edge */
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        /* Center social icons */
+        align-items: center;
+        z-index: 100;
+        /* Ensure above hero content */
     }
 
     .social-label {
         display: none;
-        /* Hide label on mobile to save space */
     }
 
     .social-icons-container {
-        flex-direction: row;
-        /* Horizontal icons */
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .social-links {
-        flex-direction: row;
-        margin-bottom: 0;
-        margin-right: 1rem;
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 1rem;
         max-height: none;
-        /* Reset toggle height logic for mobile if needed, or keep toggle */
+    }
+
+    /* Ensure button is clickable */
+    .toggle-btn {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .toggle-btn i {
+        pointer-events: none;
     }
 
     /* About Section Mobile */
